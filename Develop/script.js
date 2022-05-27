@@ -25,12 +25,16 @@ let passwordInfo = {
 
 function generatePassword() {
     
-    //prompts the user to enter a password length
-    let passwordSize = parseInt(window.prompt('Enter a password length. Must be at least 8 characters, and no more than 128 characters.'));
+  
+  //prompts the user to enter a password length
+  let passwordSize = parseInt(window.prompt('Enter a password length. Must be at least 8 characters, and no more than 128 characters.'));
+  let addRandomArray = [];
+  let randomPass = [];
     
+    if (passwordSize >= 8 && passwordSize <= 128) { 
+
+
     //placeholder arrays for selected characters and random password
-    let addRandomArray = [];
-    let randomPass = [];
     
     //prompts user for each type of character included and updates the associated passwordInfo object
     if (window.confirm('Include lowercase letters?')) {
@@ -67,15 +71,23 @@ function generatePassword() {
       generatePassword();
 
     }
-
-    for (i=0; i != passwordSize; i++) {
+    debugger;
+    for (i = 0; i < passwordSize; i++) {
 
       randomPass[i] = addRandomArray[Math.floor(Math.random() * addRandomArray.length)];
-
+      
     }
   
-    return randomPass;
+
     
+  } else {
+    
+    window.alert("Please choose a value between 8 and 128.");
+    generatePassword();
+  }
+ 
+  return randomPass;
+  
   }
 
 
@@ -97,7 +109,7 @@ function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
+  passwordText.value = password.join('');
 
 }
 
